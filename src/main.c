@@ -13,6 +13,8 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 int main ()
 {
+	printf("Hello, World!\n");  // Test to see if I can run code examples from W3Schools
+
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
