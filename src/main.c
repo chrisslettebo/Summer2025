@@ -11,6 +11,10 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 
+#define speed 2
+#define start_x 400
+#define start_y 200
+
 int main ()
 {
 	printf("Hello, World!\n");  // Test to see if I can run code examples from W3Schools
@@ -26,7 +30,8 @@ int main ()
 
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
-	
+	int pos_x = start_x;
+	int pos_y = start_y;
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
@@ -34,15 +39,35 @@ int main ()
 		BeginDrawing();
 
 		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
+		
+		ClearBackground(RED);
 
 		// draw some text using the default font
 		DrawText("Hello Raylib", 200,200,20,WHITE);
 
 		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
+		
+		DrawTexture(wabbit, pos_x, pos_y, WHITE);
 		
 		// end the frame and get ready for the next one  (display frame, poll input, etc...)
+		if (IsKeyDown(KEY_W))
+		{
+			pos_y -= speed;
+		}
+		else if (IsKeyDown(KEY_S))
+		{
+			pos_y += speed;
+		}
+		if (IsKeyDown(KEY_A))
+		{
+			pos_x -= speed;
+		}
+		else if (IsKeyDown(KEY_D))
+		{
+			pos_x += speed;
+		}
+		
+		
 		EndDrawing();
 	}
 
