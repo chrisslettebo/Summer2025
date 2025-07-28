@@ -111,6 +111,7 @@ void updateMenu(GameScreen *currentScreen){
 	case SCREEN_GAMEPLAY:
 		// Update gameplay logic
 		if (IsKeyPressed(KEY_ESCAPE)) *currentScreen = SCREEN_MENU;
+		if (IsKeyPressed(KEY_BACKSPACE)) *currentScreen = SCREEN_MENU;
 		break;
 
 	default: break;
@@ -124,6 +125,7 @@ void drawMenu(GameScreen currentScreen){
             DrawText("MAIN MENU", 100, 100, 30, BLACK);
             DrawText("Press ENTER to Play", 100, 150, 20, DARKGRAY);
             DrawText("Press S for Settings", 100, 180, 20, DARKGRAY);
+			DrawText("Press ESC to exit", 100, 210, 20, DARKGRAY);
             break;
 
         case SCREEN_SETTINGS:
@@ -134,6 +136,7 @@ void drawMenu(GameScreen currentScreen){
         case SCREEN_GAMEPLAY:
             DrawText("GAMEPLAY", 100, 100, 30, BLACK);
             DrawText("Press ESC to exit", 100, 150, 20, DARKGRAY);
+			DrawText("Press BACKSPACE to return", 100, 180, 20, DARKGRAY);
             break;
 
         default: break;
