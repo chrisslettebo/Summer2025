@@ -37,8 +37,6 @@ void drawButton(Button button, int fontsize, Color color);
 //void drawButton(x, y, w, h)
 int main ()
 {
-	printf("Hello, World!\n");  // Test to see if I can run code examples from W3Schools
-
 	// Tell the window to use vsync and work on high DPI displays
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
@@ -115,31 +113,30 @@ int main ()
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 		switch (currentScreen)
-    {
-        case SCREEN_MENU:
-			DrawText("MAIN MENU", 100, 100, 30, BLACK);
-			DrawText("Press ENTER to Play", 100, 150, 20, DARKGRAY);
-			DrawText("Press S for Settings", 100, 180, 20, DARKGRAY);
-			DrawText("Press ESC to exit", 100, 210, 20, DARKGRAY);
-			if(menuButtonStart.hovering) drawButton(menuButtonStart, 30, RED);
-			else drawButton(menuButtonStart, 30, GRAY);
-            break;
+		{
+			case SCREEN_MENU:
+				DrawText("MAIN MENU", 100, 100, 30, BLACK);
+				DrawText("Press ENTER to Play", 100, 150, 20, DARKGRAY);
+				DrawText("Press S for Settings", 100, 180, 20, DARKGRAY);
+				DrawText("Press ESC to exit", 100, 210, 20, DARKGRAY);
+				if(menuButtonStart.hovering) drawButton(menuButtonStart, 30, RED);
+				else drawButton(menuButtonStart, 30, GRAY);
+				break;
 
-        case SCREEN_SETTINGS:
-			DrawText("SETTINGS", 100, 100, 30, BLACK);
-			DrawText("Press BACKSPACE to return", 100, 150, 20, DARKGRAY);
-            break;
+			case SCREEN_SETTINGS:
+				DrawText("SETTINGS", 100, 100, 30, BLACK);
+				DrawText("Press BACKSPACE to return", 100, 150, 20, DARKGRAY);
+				break;
 
-        case SCREEN_GAMEPLAY:
-			DrawText("GAMEPLAY", 100, 100, 30, BLACK);
-			DrawText("Press ESC to exit", 100, 150, 20, DARKGRAY);
-			DrawText("Press BACKSPACE to return", 100, 180, 20, DARKGRAY);
-			DrawTexture(wabbit, pos_x, pos_y, WHITE);
-            break;
-
-            
-            break;
-    }
+			case SCREEN_GAMEPLAY:
+				DrawText("GAMEPLAY", 100, 100, 30, BLACK);
+				DrawText("Press ESC to exit", 100, 150, 20, DARKGRAY);
+				DrawText("Press BACKSPACE to return", 100, 180, 20, DARKGRAY);
+				DrawTexture(wabbit, pos_x, pos_y, WHITE);
+				break;
+		
+			default: break;
+		}
 
 		EndDrawing();
 		
