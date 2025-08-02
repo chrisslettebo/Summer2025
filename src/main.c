@@ -70,13 +70,16 @@ int main ()
 				if (IsKeyPressed(KEY_ENTER)) currentScreen = SCREEN_GAMEPLAY;
 				if (IsKeyPressed(KEY_S)) currentScreen = SCREEN_SETTINGS;
 				if (CheckCollisionPointRec(mousePoint, menuRec))
-			{
-				if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) menuButtonStart.activated = true;
-				else menuButtonStart.hovering = true;
-			}
-			else menuButtonStart.hovering = false;
+					{
+						if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) menuButtonStart.activated = true;
+						else menuButtonStart.hovering = true;
+					}
+					else {
+						menuButtonStart.hovering = false;
+						menuButtonStart.activated = false;
+					}
 
-			if (menuButtonStart.activated == true) currentScreen = SCREEN_GAMEPLAY;
+				if (menuButtonStart.activated == true) currentScreen = SCREEN_GAMEPLAY;
 				break;
 		
 			case SCREEN_SETTINGS:
