@@ -7,13 +7,11 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 */
 
+#include <stdio.h>  // strandard input/output header for printf and sprintf functions
 #include "raylib.h"
-
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
+#include "../build/build_files/player.h"
 
-#define speed 2
-#define start_x 400
-#define start_y 200
 
 typedef enum GameScreen {
     SCREEN_MENU = 0,
@@ -46,11 +44,13 @@ int main ()
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
 
-	// Load a texture from the resources directory
-	Texture wabbit = LoadTexture("wabbit_alpha.png");
+	// Initialize a player structure
+	Player my_player;
+	// Call the modular function to initialize the player
+	initialize_player(&my_player, "wabbit_alpha.png", 600.0f, 300.0f, 500.0f);
+	// Set the target FPS to 60
 	GameScreen currentScreen = SCREEN_MENU;
-	int pos_x = start_x;
-	int pos_y = start_y;
+
 	
 	Vector2 mousePoint = { 0.0f, 0.0f };
 	// menu resources
@@ -90,24 +90,11 @@ int main ()
 			case SCREEN_GAMEPLAY:
 				// Update gameplay logic
 				if (IsKeyPressed(KEY_BACKSPACE)) currentScreen = SCREEN_MENU;
+				// Update the game state
+				float delta_time = GetFrameTime(); // Get the delta time from raylib and use it for consistency over different frame rates
+				move_player(&my_player, delta_time); // Call the player movement function
+
 				// end the frame and get ready for the next one  (display frame, poll input, etc...)
-				if (IsKeyDown(KEY_W))
-				{
-					pos_y -= speed;
-				}
-				else if (IsKeyDown(KEY_S))
-				{
-					pos_y += speed;
-				}
-				if (IsKeyDown(KEY_A))
-				{
-					pos_x -= speed;
-				}
-				else if (IsKeyDown(KEY_D))
-				{
-					pos_x += speed;
-				}
-				break;
 		
 			default: break;
 		}
@@ -135,7 +122,15 @@ int main ()
 				DrawText("GAMEPLAY", 100, 100, 30, BLACK);
 				DrawText("Press ESC to exit", 100, 150, 20, DARKGRAY);
 				DrawText("Press BACKSPACE to return", 100, 180, 20, DARKGRAY);
-				DrawTexture(wabbit, pos_x, pos_y, WHITE);
+
+				draw_player(&my_player); // Call the player drawing function
+
+				// Display debug information directly on the screen
+				char posText[64];
+				sprintf(posText, "Position: (%.2f, %.2f)", my_player.x_pos, my_player.y_pos);
+				DrawText(posText, 10, 40, 20, BLACK);
+				DrawFPS(10, 10);
+
 				break;
 		
 			default: break;
@@ -147,7 +142,7 @@ int main ()
 
 	// cleanup
 	// unload our texture so it can be cleaned up
-	UnloadTexture(wabbit);
+	unload_player(&my_player); // Call the player unload function
 
 	// destroy the window and cleanup the OpenGL context
 	CloseWindow();
