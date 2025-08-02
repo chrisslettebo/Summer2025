@@ -69,6 +69,7 @@ int main ()
 				// Update menu logic (e.g. check button presses)
 				if (IsKeyPressed(KEY_ENTER)) currentScreen = SCREEN_GAMEPLAY;
 				if (IsKeyPressed(KEY_S)) currentScreen = SCREEN_SETTINGS;
+				menuButtonStart.activated = false;
 				if (CheckCollisionPointRec(mousePoint, menuRec))
 					{
 						if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) menuButtonStart.activated = true;
@@ -76,7 +77,6 @@ int main ()
 					}
 					else {
 						menuButtonStart.hovering = false;
-						menuButtonStart.activated = false;
 					}
 
 				if (menuButtonStart.activated == true) currentScreen = SCREEN_GAMEPLAY;
