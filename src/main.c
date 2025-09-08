@@ -18,6 +18,7 @@ typedef enum GameScreen {
     SCREEN_SETTINGS,
     SCREEN_MAP,
 	SCREEN_GAMEPLAY,
+	SCREEN_PAUSE,
     SCREEN_EXIT
 } GameScreen;
 
@@ -30,6 +31,7 @@ typedef struct Button {
 	bool hovering;
 	bool activated; 
 } Button;
+
 
 void drawButton(Button button, int fontsize, Color color);
 //void drawButton(x, y, w, h)
@@ -54,10 +56,14 @@ int main ()
 	
 	Vector2 mousePoint = { 0.0f, 0.0f };
 	// menu resources
-	Button menuButtonStart = {200, 300, 150, 50, "START", false, false};
+	Button menuButtonStart = {550, 300, 200, 50, "START", false, false};
 	Rectangle menuRec = {menuButtonStart.x, menuButtonStart.y, menuButtonStart.width, menuButtonStart.height};
+	Button menuButtonSettings = {550, 380, 200, 50, "SETTINGS", false, false};
+	Rectangle menuSRec = {menuButtonSettings.x, menuButtonSettings.y, menuButtonSettings.width, menuButtonSettings.height};
 
-
+	//enemies
+	int capacity = 10;
+    int count = 0;
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{	
@@ -79,7 +85,20 @@ int main ()
 						menuButtonStart.hovering = false;
 					}
 
-				if (menuButtonStart.activated == true) currentScreen = SCREEN_GAMEPLAY;
+				if (menuButtonStart.activated == true) {
+					currentScreen = SCREEN_GAMEPLAY;
+				}
+				menuButtonSettings.activated = false;
+				if (CheckCollisionPointRec(mousePoint, menuSRec))
+					{
+						if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) menuButtonSettings.activated = true;
+						else menuButtonSettings.hovering = true;
+					}
+					else {
+						menuButtonSettings.hovering = false;
+					}
+
+				if (menuButtonSettings.activated == true) currentScreen = SCREEN_SETTINGS;
 				break;
 		
 			case SCREEN_SETTINGS:
@@ -111,6 +130,8 @@ int main ()
 				DrawText("Press ESC to exit", 100, 210, 20, DARKGRAY);
 				if(menuButtonStart.hovering) drawButton(menuButtonStart, 30, RED);
 				else drawButton(menuButtonStart, 30, GRAY);
+				if(menuButtonSettings.hovering) drawButton(menuButtonSettings, 30, RED);
+				else drawButton(menuButtonSettings, 30, GRAY);
 				break;
 
 			case SCREEN_SETTINGS:
@@ -154,3 +175,5 @@ void drawButton(Button button, int fontsize, Color color){
 	DrawRectangleRounded(rec,  0.15, 1, color);
 	DrawText(button.text, button.x+10, button.y+10, fontsize, BLACK);
 }
+
+
