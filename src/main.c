@@ -47,7 +47,7 @@ int main ()
 	// Initialize a player structure
 	Player my_player;
 	// Call the modular function to initialize the player
-	initialize_player(&my_player, "wabbit_alpha.png", 600.0f, 300.0f, 500.0f);
+	initialize_player(&my_player, "knight.png", 600.0f, 300.0f, 500.0f);
 	// Set the target FPS to 60
 	GameScreen currentScreen = SCREEN_MENU;
 
