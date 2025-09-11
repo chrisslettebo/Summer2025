@@ -8,9 +8,11 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 */
 
 #include <stdio.h>  // strandard input/output header for printf and sprintf functions
+#include <stdlib.h>
 #include "raylib.h"
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
-#include "../build/build_files/player.h"
+#include "Player/player.h"
+#include "Enemy/enemies.h"
 
 
 typedef enum GameScreen {
@@ -32,6 +34,7 @@ typedef struct Button {
 	bool activated; 
 } Button;
 
+#define MAX_ENEMIES 10
 
 void drawButton(Button button, int fontsize, Color color);
 //void drawButton(x, y, w, h)
@@ -62,8 +65,8 @@ int main ()
 	Rectangle menuSRec = {menuButtonSettings.x, menuButtonSettings.y, menuButtonSettings.width, menuButtonSettings.height};
 
 	//enemies
-	int capacity = 10;
-    int count = 0;
+	Enemy enemies[MAX_ENEMIES] = {0};
+    int enemy_count = 0;
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{	
@@ -113,6 +116,8 @@ int main ()
 				float delta_time = GetFrameTime(); // Get the delta time from raylib and use it for consistency over different frame rates
 				move_player(&my_player, delta_time); // Call the player movement function
 
+				spawn_enemies(enemies, MAX_ENEMIES, &enemy_count);
+
 				// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		
 			default: break;
@@ -145,13 +150,14 @@ int main ()
 				DrawText("Press BACKSPACE to return", 100, 180, 20, DARKGRAY);
 
 				draw_player(&my_player); // Call the player drawing function
+				draw_enemies(enemies, MAX_ENEMIES);
 
 				// Display debug information directly on the screen
 				char posText[64];
 				sprintf(posText, "Position: (%.2f, %.2f)", my_player.x_pos, my_player.y_pos);
 				DrawText(posText, 10, 40, 20, BLACK);
 				DrawFPS(10, 10);
-
+				
 				break;
 		
 			default: break;
