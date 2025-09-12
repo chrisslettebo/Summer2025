@@ -25,10 +25,23 @@ void spawn_enemies(Enemy enemies[], int MAX_ENEMIES, int* enemy_count){
     }
 }
 
-void update_enemies(Enemy* enemies[], int MAX_ENEMIES){
+void update_enemies(Enemy enemies[], int MAX_ENEMIES){
     for(int i= 0; i<MAX_ENEMIES; i++){
-        if(enemies[i]->hp==0 && enemies[i]->alive==1){
-            enemies[i]->alive=0;
+        if(enemies[i].hp==0 && enemies[i].alive==1){
+            enemies[i].alive=0;
+        }
+    }
+
+}
+
+/**
+ * @brief Unloads the player's texture from memory.
+ */
+void unload_enemies(Enemy* enemies, int MAX_ENEMIES) {
+    for(int i= 0; i<MAX_ENEMIES; i++){
+        if (enemies[i].alive != 0) {
+            UnloadTexture(enemies[i].texture); // Use raylib's unload function
+            printf("Enemmy texture unloaded.\n");  // Log the unloading action
         }
     }
 }

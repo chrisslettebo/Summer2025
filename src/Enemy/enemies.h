@@ -16,7 +16,8 @@ typedef struct Enemy
 
 void draw_enemies(const Enemy* enemies, int MAX_ENEMIES);
 void spawn_enemies(Enemy enemies[], int MAX_ENEMIES, int* enemy_count);
-void update_enemies(Enemy* enemies[], int MAX_ENEMIES);
+void update_enemies(Enemy enemies[], int MAX_ENEMIES);
+void unload_enemies(Enemy* enemies, int MAX_ENEMIES);
 
 
 #endif // Enemy

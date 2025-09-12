@@ -117,6 +117,7 @@ int main ()
 				move_player(&my_player, delta_time); // Call the player movement function
 
 				spawn_enemies(enemies, MAX_ENEMIES, &enemy_count);
+				
 
 				// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		
@@ -170,6 +171,7 @@ int main ()
 	// cleanup
 	// unload our texture so it can be cleaned up
 	unload_player(&my_player); // Call the player unload function
+	unload_enemies(enemies, MAX_ENEMIES); // Call the player unload function
 
 	// destroy the window and cleanup the OpenGL context
 	CloseWindow();
