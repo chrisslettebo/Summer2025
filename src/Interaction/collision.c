@@ -7,6 +7,7 @@ void handleCollisions(Player *player, Enemy enemies[], int enemyCount) {
         Vector2 vec_E = {enemies[i].x, enemies[i].y};
         if (CheckCollisionCircles(vec_P, player->texture.width, vec_E, enemies[i].texture.width)) {
             enemies[i].alive=0;
+            UnloadTexture(enemies[i].texture);
         }
     }
 }
