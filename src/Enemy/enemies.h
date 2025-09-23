@@ -7,8 +7,8 @@
 typedef struct Enemy
 {
 	Texture2D texture;
-	int x;
-	int y;
+	float x;
+	float y;
 	int hp;
 	char name;
 	int alive;

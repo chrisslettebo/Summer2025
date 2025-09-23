@@ -9,6 +9,8 @@
 		"**/*.exe": true,
 	},
 	"files.associations": {
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"collision.h": "c",
+		"enemies.h": "c"
 	}
 }

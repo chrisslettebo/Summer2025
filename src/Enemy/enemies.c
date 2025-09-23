@@ -16,8 +16,8 @@ void draw_enemies(const Enemy* enemies, int MAX_ENEMIES) {
 }
 
 void spawn_enemies(Enemy enemies[], int MAX_ENEMIES, int* enemy_count){
-    Texture2D bandit_texture = LoadTexture("wabbit_alpha.png");
     if (*enemy_count < MAX_ENEMIES) {
+        Texture2D bandit_texture = LoadTexture("wabbit_alpha.png");
         int x = GetRandomValue(10, 1000);
         int y = GetRandomValue(10, 1000);
         enemies[*enemy_count] = (Enemy){bandit_texture, x, y, 100, (char) *enemy_count, 1}; // hp=100, pos=(10,20)

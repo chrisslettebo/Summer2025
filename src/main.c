@@ -13,6 +13,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "Player/player.h"
 #include "Enemy/enemies.h"
+#include "Interaction/collision.h"
 
 
 typedef enum GameScreen {
@@ -117,7 +118,7 @@ int main ()
 				move_player(&my_player, delta_time); // Call the player movement function
 
 				spawn_enemies(enemies, MAX_ENEMIES, &enemy_count);
-				
+				handleCollisions(&my_player, enemies, enemy_count);
 
 				// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		
@@ -163,7 +164,6 @@ int main ()
 		
 			default: break;
 		}
-
 		EndDrawing();
 		
 	}
